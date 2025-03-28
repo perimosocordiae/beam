@@ -66,6 +66,7 @@ _CONVERTED_COLLECTIONS = [
     collections.abc.MutableSet,
     collections.abc.Collection,
     collections.abc.Sequence,
+    collections.abc.Mapping,
 ]
 
 
@@ -373,6 +374,8 @@ def convert_to_beam_type(typ):
       _TypeMapEntry(match=is_any, arity=0, beam_type=typehints.Any),
       _TypeMapEntry(
           match=_match_is_primitive(dict), arity=2, beam_type=typehints.Dict),
+      _TypeMapEntry(
+          match=_match_is_exactly_mapping, arity=2, beam_type=typehints.Dict),
       _TypeMapEntry(
           match=_match_is_exactly_iterable,
           arity=1,
